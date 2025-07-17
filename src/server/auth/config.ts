@@ -1,7 +1,8 @@
 import { PrismaAdapter } from "@auth/prisma-adapter";
 import type { DefaultSession, NextAuthConfig } from "next-auth";
-import DiscordProvider from "next-auth/providers/discord";
+import MicrosoftEntraID from "next-auth/providers/microsoft-entra-id";
 
+import { env } from "~/env";
 import { db } from "~/server/db";
 
 /**
@@ -32,7 +33,11 @@ declare module "next-auth" {
  */
 export const authConfig = {
 	providers: [
-		DiscordProvider,
+		MicrosoftEntraID({
+			clientId: env.AUTH_MICROSOFT_ENTRA_ID_ID,
+			clientSecret: env.AUTH_MICROSOFT_ENTRA_ID_SECRET,
+			issuer: env.AUTH_MICROSOFT_ENTRA_ID_ISSUER,
+		}),
 		/**
 		 * ...add more providers here.
 		 *
