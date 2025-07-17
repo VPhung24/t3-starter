@@ -16,7 +16,8 @@ export const env = createEnv({
 		AUTH_MICROSOFT_ENTRA_ID_ISSUER: z
 			.string()
 			.default("https://login.microsoftonline.com/common/v2.0"),
-		DATABASE_URL: z.string().url(),
+		POSTGRES_URL: z.string().url(),
+		POSTGRES_URL_NON_POOLING: z.string().url(),
 		NODE_ENV: z
 			.enum(["development", "test", "production"])
 			.default("development"),
@@ -40,7 +41,8 @@ export const env = createEnv({
 		AUTH_MICROSOFT_ENTRA_ID_ID: process.env.AUTH_MICROSOFT_ENTRA_ID_ID,
 		AUTH_MICROSOFT_ENTRA_ID_SECRET: process.env.AUTH_MICROSOFT_ENTRA_ID_SECRET,
 		AUTH_MICROSOFT_ENTRA_ID_ISSUER: process.env.AUTH_MICROSOFT_ENTRA_ID_ISSUER,
-		DATABASE_URL: process.env.DATABASE_URL,
+		POSTGRES_URL: process.env.POSTGRES_URL,
+		POSTGRES_URL_NON_POOLING: process.env.POSTGRES_URL_NON_POOLING,
 		NODE_ENV: process.env.NODE_ENV,
 	},
 	/**
