@@ -1,5 +1,7 @@
 import { z } from "zod";
 
+import { createSchema, getByIdSchema } from "~/lib/schemas/post";
+
 import {
 	createTRPCRouter,
 	protectedProcedure,
@@ -16,7 +18,7 @@ export const postRouter = createTRPCRouter({
 		}),
 
 	create: protectedProcedure
-		.input(z.object({ name: z.string().min(1) }))
+		.input(createSchema)
 		.mutation(async ({ ctx, input }) => {
 			return ctx.db.post.create({
 				data: {
@@ -30,6 +32,21 @@ export const postRouter = createTRPCRouter({
 		const post = await ctx.db.post.findFirst({
 			orderBy: { createdAt: "desc" },
 			where: { createdBy: { id: ctx.session.user.id } },
+		});
+
+		return post ?? null;
+	}),
+
+	getAll: protectedProcedure.query(async ({ ctx }) => {
+		return ctx.db.post.findMany({
+			orderBy: { createdAt: "desc" },
+			where: { createdBy: { id: ctx.session.user.id } },
+		});
+	}),
+
+	getById: protectedProcedure.input(getByIdSchema).query(async ({ ctx, input }) => {
+		const post = await ctx.db.post.findUnique({
+			where: { id: input.id, createdBy: { id: ctx.session.user.id } },
 		});
 
 		return post ?? null;
