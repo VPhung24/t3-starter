@@ -8,9 +8,10 @@ pnpm install
 
 ## Tech Stack
 
-- Next.js
-- Tailwind CSS 4
-- Prisma
-- NextAuth.js
-- tRPC
-- Biome 2.1.1
+- [Next.js](https://nextjs.org)
+- [NextAuth.js](https://next-auth.js.org)
+- [Prisma](https://prisma.io)
+- [Drizzle](https://orm.drizzle.team)
+- [Tailwind CSS](https://tailwindcss.com) 4
+- [tRPC](https://trpc.io)
+- [Biome](https://biomejs.dev) 2.1.1
